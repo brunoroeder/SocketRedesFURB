@@ -28,24 +28,4 @@ class Message
         $run = $abstract->send($request);
         var_dump($run);
     }
-
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getUserId()
-    {
-        return $this->userId;
-    }
 }
