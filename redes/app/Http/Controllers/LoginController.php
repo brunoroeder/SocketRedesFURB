@@ -25,7 +25,7 @@ class LoginController extends Controller
     {
         // validate the info, create rules for the inputs
         $rules = array(
-            'userId'    => 'required',
+            'userId'    => 'required|numeric',
             'password' => 'required|alphaNum'
         );
         $validator = Validator::make(Input::all(), $rules);
@@ -35,6 +35,19 @@ class LoginController extends Controller
                 ->withErrors($validator) // send back all errors to the login form
                 ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
         } else {
+            $abstract = new Socket();
+
+            $abstract->connectTcp();
+            $request = 'GET USERS ' . Input::get('userId') .':'  . Input::get('password') ."\n";
+            $run = $abstract->run($request);
+            // $abstract->close();
+
+    
+            if ($run == '"Usu\u00e1rio inv\u00e1lido!\r\n"') {
+                return Redirect::back()->withInput()->withErrors(array('password' => 'Erro na senha!'));
+            }
+         
+
             Session::put('userId', Input::get('userId'));
             Session::put('password', Input::get('password'));
             return Redirect::to('chat');
