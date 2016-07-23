@@ -133,10 +133,13 @@
 					header:$('meta[name="_token"]').attr('content')
 				})
 				e.preventDefault(e);
+				checkedValue = $("input[name='userid']:checked").val();
+				$("#user").attr('value', checkedValue);
 				user = $("input[name='user']").val();
 				if(user ==  '')
 				{
 					alert("Selecione algum usuário online para enviar a mensagem");
+
 				}else{
 					$.ajax({
 
