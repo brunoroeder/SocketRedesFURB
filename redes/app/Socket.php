@@ -45,7 +45,7 @@ class Socket
         }
     }
 
-    public function run($request)
+    public function sendTcp($request)
     {
         try {
             socket_send($this->socket, $request, strlen($request), 0);
@@ -63,16 +63,10 @@ class Socket
         $this->socket = null;
     }
 
-    public function send($input)
+    public function sendUdp($input)
     {
         socket_send($this->socket, $input, strlen($input), 0);
         $this->socket;
-
-        
-        // $this->socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-        // socket_set_option($this->socket, SOL_SOCKET, SO_BROADCAST, 1);
-        // socket_sendto($this->socket, $input, strlen($input), 0, self::, $port);
-        // var_dump(socket_strerror(socket_last_error($this->socket)));
 
     }
 }

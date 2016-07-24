@@ -16,6 +16,9 @@ class ChatController extends Controller
 
     public function chatHome()
     {
+        if (Session::get('userId') == null) {
+            return Redirect::to('login');
+        }
         // show the form
         return View::make('chat');
 

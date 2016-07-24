@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
-use App\Socket;
+use App\User;
 use App\Http\Requests;
 use View;
 use Input;
@@ -35,21 +35,16 @@ class LoginController extends Controller
                 ->withErrors($validator) // send back all errors to the login form
                 ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
         } else {
-            $abstract = new Socket();
+            $user = new User;
+            $run = $user->getUserList();
 
-            $abstract->connectTcp();
-            $request = 'GET USERS ' . Input::get('userId') .':'  . Input::get('password') ."\n";
-            $run = $abstract->run($request);
-            // $abstract->close();
-
-    
-            if ($run == '"Usu\u00e1rio inv\u00e1lido!\r\n"') {
+            if ($run == 'userNotValid') {
                 return Redirect::back()->withInput()->withErrors(array('password' => 'Erro na senha!'));
             }
-         
 
             Session::put('userId', Input::get('userId'));
             Session::put('password', Input::get('password'));
+
             return Redirect::to('chat');
         }
     }
@@ -58,5 +53,6 @@ class LoginController extends Controller
     {
         Session::forget('userId');
         Session::forget('password');
+        return Redirect::to('login');
     }
 }
