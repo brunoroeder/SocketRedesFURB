@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Session;
 use App\Socket;
 
 namespace App;
@@ -35,7 +36,7 @@ class User
             $value = self::utf8Ansi($value);
             $temp[] = str_replace('"', '', $value);
             if (($i % 3) == 0) {
-                $temp[0] = "<input type='radio' name='userid' id='$temp[0]' value='$temp[0]' />";
+                $temp[0] = "<input type='radio' name='userid' id='$temp[0]' value='$temp[0]' />(" . $temp[0] . ") ";
                 $temp[2] = ' | vitórias: '.$temp[2] . '<br/>';
                 $result[] = $temp;
                 $temp = array();
