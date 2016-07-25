@@ -15,7 +15,6 @@
 		}
 		body {
 			margin: 0px;
-			/*font-family: Helvetica;*/
 			font-family: 'Catamaran';
 			color: #fff;
 			font-size: 12px;
@@ -35,7 +34,7 @@
 		}
 		#top {
 			height: 100px;
-			background-color: #F4F4F4;
+			background-color: #fff;
 		}
 		#left {
 			height: 93%;
@@ -60,7 +59,7 @@
 		}
 		#bot {
 			clear: right;
-			background-color: #DCDCDC;
+			background-color: #fff;
 			position:absolute;
 			bottom:0;
 			width:800px;
@@ -86,6 +85,7 @@
 </head>
 <body>
 
+	<div id="top"></div>
 	<div id="conteiner">
 		<div id="left">
 			<meta name="_token" content="{{ csrf_token() }}" />            
