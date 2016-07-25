@@ -40,7 +40,7 @@ class Message
             return json_encode('');
         }
         
-        $result[1] = ': '.$result[1] . "<br/>";
+        $result[1] = ': '. Socket::utf8Ansi($result[1]) . "<br/>";
         
         return json_encode($result);
     }
