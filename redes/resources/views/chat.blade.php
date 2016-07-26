@@ -131,16 +131,23 @@
 				setTimeout(function(){
 					messageList();
 				}, 1000);
-				// checkedValue = $("input[name='user']:checked").val();
-				$.each(JSON.parse(result), function (key, data) {
-					$("#div2").append(data);	 
-					// $("#"+checkedValue).attr('checked', 'checked');
-				});
+			
+				message = JSON.parse(result);
+				if(message != "")
+				{
+					var username = $("input[id='username-"+ message[0]+"']").val();
+					if(username != null){
+						message[0] = $("input[id='username-"+ message[0]+"']").val();
+					}else{
+						//usuarios offlines nao consigo pegar o nome, visto que o socket nao possui uma listagem de todos os usuarios, apenas dos online
+						message[0] = message[0] + ' Offline';
+					}
+					$("#div2").append(message);	 
+				}
 			}});
 		}
 
 		messageList();
-
 
 		$(function(){
 			$('#chat').on('submit',function(e){
@@ -157,17 +164,16 @@
 
 				}else{
 					$.ajax({
-
 						type:"POST",
 						url:'/messagesend',
 						data:$(this).serialize(),
 						dataType: 'json',
 						success: function(data){
-							console.log(data);
-							$("input[name='message']").val('')
+							$("#div2").append($("input[name='message']").val());
+							$("input[name='message']").val('');
 						},
 						error: function(data){
-							console.log('Erro!');
+							$("#div2").append("Eu: " + $("input[name='message']").val() + "<br/>")
 							$("input[name='message']").val('')
 						}
 					})

@@ -17,13 +17,11 @@ class User
         $run = $abstract->sendTcp($request);
         $abstract->close();
 
-       
         if ($run == '"Usu\u00e1rio inv\u00e1lido!\r\n"') {
             return "userNotValid";
         }
 
         return self::formatUserReturn($run);
-
     }
 
     public static function formatUserReturn($data)
@@ -36,7 +34,7 @@ class User
             $value = Socket::utf8Ansi($value);
             $temp[] = str_replace('"', '', $value);
             if (($i % 3) == 0) {
-                $temp[0] = "<input type='radio' name='userid' id='$temp[0]' value='$temp[0]' />(" . $temp[0] . ") ";
+                $temp[0] = "<input name'username' type='hidden' id='username-" . $temp[0] ."' value='" .  $temp[1] . "'><input type='radio' name='userid' id='$temp[0]' value='$temp[0]' />(" . $temp[0] . ") ";
                 $temp[2] = ' | vitórias: '.$temp[2] . '<br/>';
                 $result[] = $temp;
                 $temp = array();
