@@ -17,7 +17,7 @@
 			margin: 0px;
 			font-family: 'Catamaran';
 			color: #fff;
-			font-size: 12px;
+			font-size: 13px;
 		}
 		p {
 			margin: 0px;
